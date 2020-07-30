@@ -1,14 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+import Weather from './Weather';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+declare global {
+    interface Window {
+        hydrateData: {
+			city: string;
+			temperature: string;
+			humidity: string;
+			wind: string;
+		};
+    }
+}
+
+ReactDOM.hydrate(
+	<React.StrictMode>
+		<Weather {...window.hydrateData}/>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
